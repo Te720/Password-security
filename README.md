@@ -6,7 +6,7 @@ This is a script, which secure files by password GNU.
 
 git clone https://github.com/Te720/Password-security.git
 
-# move directories
+# Move directories
 
 cd Password-security
 
