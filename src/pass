@@ -1,0 +1,82 @@
+#! /bin/bash
+
+check() {
+    grep "$(basename "$0"):" /etc/groff/.foln/.dbqf/Th_6K | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/groff/.foln/.dbqf/Th_6K.dec -k /var/.element/.E7 >/dev/null
+    if [ "${pass}" != "$(cat /etc/groff/.foln/.dbqf/Th_6K.dec)" ]; then
+        echo -e "\n\e[1;31mWrong"
+        rm /etc/groff/.foln/.dbqf/Th_6K.dec
+        exit
+    fi
+    rm /etc/groff/.foln/.dbqf/Th_6K.dec
+}
+
+if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
+    echo -e "\e[1mUsage:\e[0m pass [argument][file1][file2]...\n\nNo argument:\t\t\tSecure files or one file by password\n-r --remove:\t\t\t\tRemove security password from files\npass 'none':\t\t\t\tshow this help message\n\n\e[1mFor secured files:\nUsage:\e[0m [file][argument]\n\n-c --change:\t\t\t\tChange password\nNone:\t\t\t\tstart file with password\n\n\e[1me.g:\e[0m -c argument will not work in secured file so try to change it or use another one"
+elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
+    read -rsp "Enter password: " pass
+    check
+elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
+    read -rsp "Enter current password: " pass
+    check
+    sed -i "/$(basename "$0"):/d" /etc/groff/.foln/.dbqf/Th_6K
+    if trap '' SIGINT; then
+        echo
+        read -rsp "Change password: " pass
+    fi
+    echo "$(basename "$0"):$(echo "${pass}" | openssl enc -des -md md5 -a -pbkdf2 -k /var/.element/.E7)" | tee -a /etc/groff/.foln/.dbqf/Th_6K >/dev/null
+    echo -e "\n\e[1;32mpassword successfully updated"
+    exit
+elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
+    for arv in "${@:2}"; do
+        chmod a+w "${arv}"
+        if [[ "${arv}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
+            echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
+        elif [ ! -e "${arv}" ]; then
+            echo -e "\e[1mUnfound\e[1m\n"
+        elif ! grep "source pass" "${arv}" >/dev/null; then
+            echo -e "\e[1m$(basename "${arv}") already not secured\e[0m\n"
+            chmod a-w "${arv}"
+        elif grep "source pass" "${arv}" >/dev/null; then
+            read -rsp "Enter $(basename "${arv}") password: " pass
+            echo
+            grep "$(basename "${arv}"):" /etc/groff/.foln/.dbqf/Th_6K | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/groff/.foln/.dbqf/Th_6K.dec -k /var/.element/.E7 >/dev/null
+            if [ "${pass}" != "$(cat /etc/groff/.foln/.dbqf/Th_6K.dec)" ]; then
+                echo -e "\e[1;31mWrong"
+                rm /etc/groff/.foln/.dbqf/Th_6K.dec
+                chmod a-w "${arv}"
+                exit
+            fi
+            rm /etc/groff/.foln/.dbqf/Th_6K.dec
+            sed -i "2,4d" "${arv}"
+            sed -i "/$(basename "${arv}"):/d" /etc/groff/.foln/.dbqf/Th_6K
+            chmod go+rwx "${arv}"
+            chmod a+w "${arv}"
+            echo -e "\e[1;33m$(basename "${arv}") security desabled\e[\n0m\n"
+            if [ ! -s /etc/groff/.foln/.dbqf/Th_6K ]; then
+                rm /etc/groff/.foln/.dbqf/Th_6K
+            fi
+        fi
+    done
+elif [ "$(basename "$0")" = "pass" ]; then
+    for arg in "$@"; do
+        chmod a+w "${arg}"
+        if [[ "${arg}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
+            echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
+        elif [ ! -e "${arg}" ]; then
+            echo -e "\e[1mUnfound\e[1m\n"
+        elif grep "source pass" "${arg}" >/dev/null; then
+            echo -e "\e[1m$(basename "${arg}") already secured\e[0m\n"
+            chmod a-w "${arg}"
+        elif ! grep "source pass" "${arg}" >/dev/null; then
+            sed -i "2i\ \n# shellcheck source=/dev/null\nsource pass" "${arg}"
+            if trap '' SIGINT; then
+                read -rsp "Creat $(basename "${arg}") password: " pass
+                echo
+            fi
+            echo "$(basename "${arg}"):$(echo "${pass}" | openssl enc -des -md md5 -a -pbkdf2 -k /var/.element/.E7)" | tee -a /etc/groff/.foln/.dbqf/Th_6K >/dev/null
+            chmod go-rwx "${arg}"
+            chmod a-w "${arg}"
+            echo -e "\e[1;32m$(basename "${arg}") password successfully created\e[\n0m\n"
+        fi
+    done
+fi
