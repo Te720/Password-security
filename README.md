@@ -26,7 +26,7 @@ git clone https://github.com/Te720/Password-security.git && cd Password-security
 
 # Help
 
-excute pass for help
+Excute pass in the terminal for see help
 
 
 
