@@ -1,7 +1,17 @@
 #! /bin/bash
 
-shc -f "$(basename "$0")" -o "$(basename "$0")"
-rm "$(basename "$0").x.c"
+shc -f "$(dir "$0")" -o "$(dir "$0")"
+rm "$(dir "$0").x.c"
+
+if [ -e .tracer]; then
+    openssl rand -hex 100 >.tracer
+    shc -f .tracer -o .tracer
+    rm .tracer.x.c
+elif [ -e /var/.tracer]; then
+    openssl rand -hex 100 >/var/.tracer
+    shc -f /var/.tracer -o /var/.tracer
+    rm /var/.tracer.x.c
+fi
 
 check() {
     grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
