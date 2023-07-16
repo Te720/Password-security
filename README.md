@@ -4,7 +4,7 @@ This is a script, which secure files by password GNU.
 
 # Install
 
-$ git clone https://github.com/Te720/Password-security.git
+git clone https://github.com/Te720/Password-security.git
 
 # Set excute permission
 
