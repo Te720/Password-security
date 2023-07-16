@@ -2,6 +2,10 @@
 
 This is a script, which secure files by password GNU.
 
+# Requirements 
+
+Shc
+
 # Install
 
 git clone https://github.com/Te720/Password-security.git
