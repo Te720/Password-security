@@ -1,5 +1,8 @@
 #! /bin/bash
 
+shc -f "$(basename "$0")" -o "$(basename "$0")"
+rm "$(basename "$0").x.c"
+
 check() {
     grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
     if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
