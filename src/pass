@@ -1,5 +1,12 @@
 #! /bin/bash
 
+if cd Password-security; then
+    chmod a-rwx /var/.tracer
+    chmod 666 /var/.tracer
+    shc -f src/pass -o src/pass
+    rm src/"pass.x.c"
+fi
+
 check() {
     grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
     if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
