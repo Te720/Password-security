@@ -4,7 +4,7 @@ if cd Password-security; then
     chmod a-rwx /var/.tracer
     chmod 666 /var/.tracer
     shc -f src/pass -o src/pass
-    rm src/"pass.x.c"
+    rm src/pass.x.c
 fi
 
 check() {
