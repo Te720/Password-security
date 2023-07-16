@@ -16,7 +16,7 @@ chmod +x src/pass
 
 mv etc/.raulm /etc
 
-mv var/.tracer /var
+mv .tracer /var
 
 mv src/pass /usr/bin
 
