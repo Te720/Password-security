@@ -14,7 +14,7 @@ chmod a-w .tracer
 
 chmod +x src/pass
 
-# Move directories
+# Copy directories
 
 cp -r etc/.raulm /etc
 
