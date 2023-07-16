@@ -22,7 +22,7 @@ mv src/pass /usr/bin
 
 # All in one command
 
-git clone https://github.com/Te720/Password-security.git && cd Password-security && chmod +x src/pass && mv etc/.raulm /etc && mv var/.tracer /var && mv src/pass /usr/bin
+git clone https://github.com/Te720/Password-security.git && cd Password-security && chmod +x src/pass && mv etc/.raulm /etc && mv .tracer /var && mv src/pass /usr/bin
 
 # Help
 
