@@ -7,7 +7,6 @@ elif [ ! -e /var/.tracer ]; then
     mv ~/Password-security/.tracer /var
     chmod og-rwx /var/.tracer 
     chmod a-wx /var/.tracer
-    #chattr +i /var/.tracer 
 fi
 
 check() {
