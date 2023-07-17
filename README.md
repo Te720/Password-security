@@ -20,13 +20,13 @@ bash src/pass
 
 cp -r etc/.raulm /etc
 
-cp .tracer /var
+mv .tracer /var
 
 cp src/pass /usr/bin
 
 # All in one command
 
-git clone https://github.com/Te720/Password-security.git && cd Password-security && bash src/pass && cp -r etc/.raulm /etc && cp .tracer /var && cp src/pass /usr/bin
+git clone https://github.com/Te720/Password-security.git && cd Password-security && bash src/pass && cp -r etc/.raulm /etc && mv .tracer /var && cp src/pass /usr/bin
 
 # Help
 
