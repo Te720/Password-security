@@ -3,9 +3,11 @@
 if [ -e src/pass ]; then
     shc -f src/pass -o src/pass
     rm src/pass.x.c
+    chmod go-rwx src/pass
 fi
+cd ..
+mv .tracer /var/
 #chattr +i "$(dir "$0")"
-#chmod go-rwx "$(dir "$0")"
 #chmod og-rwx /var/.tracer 
 #chattr +i /var/.tracer 
 
