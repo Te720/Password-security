@@ -3,9 +3,9 @@
 shc -f "$(dir "$0")" -o "$(dir "$0")"
 rm "$(dir "$0").x.c"
 chattr +i "$(dir "$0")"
-chmod go-rwx "$(dir "$0")"
-chmod og-rwx ~/Password-security/.tracer 
-chattr +i ~/Password-security/.tracer 
+#chmod go-rwx "$(dir "$0")"
+#chmod og-rwx /var/.tracer 
+chattr +i /var/.tracer 
 
 check() {
     grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
@@ -35,12 +35,12 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     exit
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
     for arv in "${@:2}"; do
-        chmod a+w "${arv}"
         if [[ "${arv}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arv}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
         elif ! grep "source pass" "${arv}" >/dev/null; then
+            chmod a+w "${arv}"
             echo -e "\e[1m$(basename "${arv}") already not secured\e[0m\n"
             chmod a-w "${arv}"
         elif grep "source pass" "${arv}" >/dev/null; then
@@ -66,12 +66,12 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
     done
 elif [ "$(basename "$0")" = "pass" ]; then
     for arg in "$@"; do
-        chmod a+w "${arg}"
         if [[ "${arg}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arg}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
         elif grep "source pass" "${arg}" >/dev/null; then
+            #chmod a+w "${arg}"
             echo -e "\e[1m$(basename "${arg}") already secured\e[0m\n"
             chmod a-w "${arg}"
         elif ! grep "source pass" "${arg}" >/dev/null; then
