@@ -43,7 +43,6 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
         elif [ ! -e "${arv}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
         elif ! grep "source pass" "${arv}" >/dev/null; then
-            chmod a+w "${arv}"
             echo -e "\e[1m$(basename "${arv}") already not secured\e[0m\n"
             chmod a-w "${arv}"
         elif grep "source pass" "${arv}" >/dev/null; then
@@ -74,7 +73,6 @@ elif [ "$(basename "$0")" = "pass" ]; then
         elif [ ! -e "${arg}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
         elif grep "source pass" "${arg}" >/dev/null; then
-            #chmod a+w "${arg}"
             echo -e "\e[1m$(basename "${arg}") already secured\e[0m\n"
             chmod a-w "${arg}"
         elif ! grep "source pass" "${arg}" >/dev/null; then
