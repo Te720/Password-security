@@ -1,11 +1,11 @@
-#! /bin/bash
+ #! /bin/bash
 
 shc -f "$(dir "$0")" -o "$(dir "$0")"
 rm "$(dir "$0").x.c"
-chmod a-w "$(dir "$0")"
+chattr +i "$(dir "$0")"
 chmod go-rwx "$(dir "$0")"
-chmod a-w ~/Password-security/.tracer
-chmod go-rwx ~/Password-security/.tracer 
+chmod og-rwx ~/Password-security/.tracer 
+chattr +i ~/Password-security/.tracer 
 
 check() {
     grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
