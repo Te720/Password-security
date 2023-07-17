@@ -1,4 +1,4 @@
- #! /bin/bash
+#! /bin/bash
 
 if [ ! -e /usr/bin/pass ]; then
     shc -f src/pass -o src/pass
