@@ -1,10 +1,10 @@
  #! /bin/bash
 
-if [ ! -e /bin/pass ]; then
+if [ ! -e /usr/bin/pass ]; then
     shc -f src/pass -o src/pass
     rm src/pass.x.c
     chmod go-rwx src/pass
-elif [ -e ~/Password-security/.tracer ]; then
+elif [ ! -e /var/.tracer ]; then
     mv ~/Password-security/.tracer /var
     chmod og-rwx /var/.tracer 
     #chattr +i /var/.tracer 
