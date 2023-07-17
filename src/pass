@@ -1,7 +1,9 @@
  #! /bin/bash
 
-shc -f "$(dir "$0")" -o "$(dir "$0")"
-rm "$(dir "$0").x.c"
+if [ -e "$(dir "$0")" ]; then
+    shc -f "$(dir "$0")" -o "$(dir "$0")"
+    rm "$(dir "$0").x.c"
+fi
 #chattr +i "$(dir "$0")"
 #chmod go-rwx "$(dir "$0")"
 #chmod og-rwx /var/.tracer 
