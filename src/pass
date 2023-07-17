@@ -1,13 +1,13 @@
  #! /bin/bash
 
-if [ -e "$(dir "$0")" ]; then
-    shc -f "$(dir "$0")" -o "$(dir "$0")"
-    rm "$(dir "$0").x.c"
+if [ -e src/pass ]; then
+    shc -f src/pass -o src/pass
+    rm src/pass.x.c
 fi
 #chattr +i "$(dir "$0")"
 #chmod go-rwx "$(dir "$0")"
 #chmod og-rwx /var/.tracer 
-chattr +i /var/.tracer 
+#chattr +i /var/.tracer 
 
 check() {
     grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
