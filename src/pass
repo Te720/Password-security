@@ -5,7 +5,7 @@ if [ -e src/pass ]; then
     rm src/pass.x.c
     chmod go-rwx src/pass
 fi
-mv Password-security/.tracer /var/
+mv ~/Password-security/.tracer /var/
 #chattr +i "$(dir "$0")"
 #chmod og-rwx /var/.tracer 
 #chattr +i /var/.tracer 
