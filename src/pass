@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ -e /src/pass ]; then
+if [ -e src/pass ]; then
     chmod go-rwx src/pass
     chmod a-w src/pass
     chmod 777 src/pass
