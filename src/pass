@@ -2,7 +2,7 @@
 
 if [ -e src/pass ]; then
     chmod a-rwx src/pass
-    chmod u+x src/pass
+    chmod u+rx src/pass
 elif [ -e .tracer ]; then
     mv .tracer /var
     chmod a-rwx /var/.tracer
