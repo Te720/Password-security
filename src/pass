@@ -2,25 +2,31 @@
 
 if [ -e src/pass ]; then
     chmod go-rwx src/pass
-    chmod a-w src/pass
+    chmod u-rw src/pass
     chmod 777 src/pass
     chmod a-rwx .tracer 
 elif [ -e .tracer ]; then
     mv .tracer /var
 fi
-
+chmod u+r "$0"
+chmod u+rw /etc/.raulm/.Ye/.D6*.Tjp
 check() {
     if [ "${pass}" != "$(grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -k /var/.tracer >/dev/null)" ]; then
         echo -e "\n\e[1;31mWrong"
+        chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
         exit
     fi
 }
 
 if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
     echo -e "\e[1mUsage:\e[0m pass [argument][file1][file2]...\n\nNo argument:\t\t\tSecure files or one file by password\n-r --remove:\t\t\t\tRemove security password from files\npass 'none':\t\t\t\tshow this help message\n\n\e[1mFor secured files:\nUsage:\e[0m [file][argument]\n\n-c --change:\t\t\t\tChange password\nNone:\t\t\t\tstart file with password\n\n\e[1me.g:\e[0m -c argument will not work in secured file so try to change it or use another one"
+    chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+    chmod u-r "$0"
 elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
     read -rsp "Enter password: " pass
     check
+    chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+    chmod u-r "$0"
 elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     read -rsp "Enter current password: " pass
     check
@@ -31,21 +37,30 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     fi
     echo "$(basename "$0"):$(echo "${pass}" | openssl enc -des -md md5 -a -pbkdf2 -k /var/.tracer)" | tee -a /etc/.raulm/.Ye/.D6*.Tjp >/dev/null
     echo -e "\n\e[1;32mpassword successfully updated"
+    chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+    chmod u-r "$0"
     exit
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
     for arv in "${@:2}"; do
         if [[ "${arv}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
+            chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+            chmod u-r "$0"
         elif [ ! -e "${arv}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
+            chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+            chmod u-r "$0"
         elif ! grep "source pass" "${arv}" >/dev/null; then
             echo -e "\e[1m$(basename "${arv}") already not secured\e[0m\n"
+            chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
             chmod a-w "${arv}"
+            chmod u-r "$0"
         elif grep "source pass" "${arv}" >/dev/null; then
             read -rsp "Enter $(basename "${arv}") password: " pass
             echo
             if [ "${pass}" != "$(grep "$(basename "${arv}"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -k /var/.tracer >/dev/null)" ]; then
                 echo -e "\e[1;31mWrong"
+                chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
                 chmod a-w "${arv}"
                 exit
             fi
@@ -59,15 +74,23 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
             fi
         fi
     done
+    chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+    chmod u-r "$0"
 elif [ "$(basename "$0")" = "pass" ]; then
     for arg in "$@"; do
         if [[ "${arg}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
+            chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+            chmod u-r "$0"
         elif [ ! -e "${arg}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
+            chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+            chmod u-r "$0"
         elif grep "source pass" "${arg}" >/dev/null; then
             echo -e "\e[1m$(basename "${arg}") already secured\e[0m\n"
+            chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
             chmod a-w "${arg}"
+            chmod u-r "$0"
         elif ! grep "source pass" "${arg}" >/dev/null; then
             sed -i "2i\ \n# shellcheck source=/dev/null\nsource pass" "${arg}"
             if trap '' SIGINT; then
@@ -80,4 +103,6 @@ elif [ "$(basename "$0")" = "pass" ]; then
             echo -e "\e[1;32m$(basename "${arg}") password successfully created\e[\n0m\n"
         fi
     done
+    chmod a-rwx /etc/.raulm/.Ye/.D6*.Tjp
+    chmod u-r "$0"
 fi
