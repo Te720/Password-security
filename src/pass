@@ -8,7 +8,7 @@ if [ -e src/pass ]; then
 fi
 
 check() {
-    grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null)" ]; then
+    grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null" ]; then
     if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
         echo -e "\n\e[1;31mWrong"
         rm /etc/.raulm/.Ye/.D6*.Tjp.dec
@@ -46,7 +46,7 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
         elif grep "source pass" "${arv}" >/dev/null; then
             read -rsp "Enter $(basename "${arv}") password: " pass
             echo
-            grep "$(basename "${arv}"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null)" ]; then
+            grep "$(basename "${arv}"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null" ]; then
             if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
                 echo -e "\e[1;31mWrong"
                 rm /etc/.raulm/.Ye/.D6*.Tjp.dec
