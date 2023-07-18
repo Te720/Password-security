@@ -8,7 +8,7 @@ if [ -e src/pass ]; then
 fi
 
 check() {
-    grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
+    grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des3 -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
     if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
         echo -e "\n\e[1;31mWrong"
         rm /etc/.raulm/.Ye/.D6*.Tjp.dec
@@ -31,7 +31,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
         echo
         read -rsp "Change password: " pass
     fi
-    echo "$(basename "$0"):$(echo "${pass}" | openssl enc -des -md md5 -a -pbkdf2 -k /var/.tracer)" | tee -a /etc/.raulm/.Ye/.D6*.Tjp >/dev/null
+    echo "$(basename "$0"):$(echo "${pass}" | openssl enc -des3 -md md5 -a -pbkdf2 -k /var/.tracer)" | tee -a /etc/.raulm/.Ye/.D6*.Tjp >/dev/null
     echo -e "\n\e[1;32mpassword successfully updated"
     exit
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
@@ -46,7 +46,7 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
         elif grep "source pass" "${arv}" >/dev/null; then
             read -rsp "Enter $(basename "${arv}") password: " pass
             echo
-            grep "$(basename "${arv}"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
+            grep "$(basename "${arv}"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des3 -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
             if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
                 echo -e "\e[1;31mWrong"
                 rm /etc/.raulm/.Ye/.D6*.Tjp.dec
@@ -78,7 +78,7 @@ elif [ "$(basename "$0")" = "pass" ]; then
                 read -rsp "Creat $(basename "${arg}") password: " pass
                 echo
             fi
-            echo "$(basename "${arg}"):$(echo "${pass}" | openssl enc -des -md md5 -a -pbkdf2 -k /var/.tracer)" | tee -a /etc/.raulm/.Ye/.D6*.Tjp >/dev/null
+            echo "$(basename "${arg}"):$(echo "${pass}" | openssl enc -des3 -md md5 -a -pbkdf2 -k /var/.tracer)" | tee -a /etc/.raulm/.Ye/.D6*.Tjp >/dev/null
             chmod go-rwx "${arg}"
             chmod a-w "${arg}"
             echo -e "\e[1;32m$(basename "${arg}") password successfully created\e[\n0m\n"
