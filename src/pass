@@ -1,8 +1,8 @@
 #! /bin/bash
 
 if [ -e src/pass ]; then
-    chmod a-rwx "$0"
-    chmod u+rx "$0"
+    chmod a-rwx src/pass
+    chmod u+rx "src/pass
     chmod a-rwx .tracer 
 elif [ -e .tracer ]; then
     mv .tracer /var
