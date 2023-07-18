@@ -50,8 +50,7 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
             fi
             sed -i "2,4d" "${arv}"
             sed -i "/$(basename "${arv}"):/d" /etc/.raulm/.Ye/.D6*.Tjp
-            chmod go+rwx "${arv}"
-            chmod a+w "${arv}"
+            chmod a+rwx "${arv}"
             echo -e "\e[1;33m$(basename "${arv}") security desabled\e[\n0m\n"
             if [ ! -s /etc/.raulm/.Ye/.D6*.Tjp ]; then
                 rm /etc/.raulm/.Ye/.D6*.Tjp
