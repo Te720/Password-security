@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ -e ~/Password-security/src/pass ]; then
+if [ ! -e /bin/pass ]; then
     chmod go-rwx ~/Password-security/src/pass
     chmod a-w ~/Password-security/src/pass
     chmod 777 ~/Password-security/src/pass
