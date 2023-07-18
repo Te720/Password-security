@@ -19,6 +19,7 @@ if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
 elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
     read -rsp "Enter password: " pass
     check
+    echo
 elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     read -rsp "Enter current password: " pass
     check
