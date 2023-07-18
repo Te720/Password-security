@@ -4,7 +4,7 @@ if [ -e src/pass ]; then
     chmod a-rwx "$0"
     chmod u+rx "$0"
     mv .tracer /var
-    chmod a-rwx /var/.tracer
+    chmod a-wx /var/.tracer
 fi
 
 check() {
