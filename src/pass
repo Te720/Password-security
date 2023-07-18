@@ -4,9 +4,9 @@ if [ ! -e /bin/pass ]; then
     chmod go-rwx ~/Password-security/src/pass
     chmod a-w ~/Password-security/src/pass
     chmod 777 ~/Password-security/src/pass
-    chmod a-rwx ~/Password-security/.tracer
 elif [ ! -e /var/.tracer ]; then
     mv ~/Password-security/.tracer /var
+    chmod a-rwx ~/Password-security/.tracer
 fi
 
 check() {
