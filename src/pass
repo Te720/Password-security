@@ -1,9 +1,11 @@
 #! /bin/bash
 
+if [ ! -e /var/.tracer ]; then
+    openssl rand -hex 300 >/var/.tracer
+fi
 if [ -e src/pass ]; then
     chmod a-rwx "$0"
     chmod u+rx "$0"
-    mv .tracer /var
     chmod a-rwx /var/.tracer
 fi
 
