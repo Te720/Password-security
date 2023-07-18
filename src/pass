@@ -4,7 +4,7 @@ if [ ! -e /usr/bin/pass ]; then
     chmod go-rwx src/pass
     chmod a-w src/pass
     chmod 777 src/pass
-elif [ -e ~/Password-security/.tracer ]; then
+elif [ ! -e /var/.tracer ]; then
     mv ~/Password-security/.tracer /var
     chmod a-rwx /var/.tracer 
 fi
