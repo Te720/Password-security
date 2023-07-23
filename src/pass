@@ -1,22 +1,21 @@
 #! /bin/bash
 
-if [ ! -e /var/.tracer ]; then
-    openssl rand -hex 300 >/var/.tracer
-fi
+
 if [ -e src/pass ]; then
     chmod a-rwx "$0"
-    chmod u+rx "$0"
-    chmod a-rwx /var/.tracer
+    sudo apt -y install -y shc -y
+    shc -f "$0" -o "$0"
+    chmod u-w "$0"
+    rm "$0".x.c
+    mkdir /etc/.raulm
+    mkdir /etc/.raulm/.Ye
+    touch /etc/.raulm/.Ye/key
 fi
 
 check() {
-    grep "$(basename "$0"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des3 -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
-    if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
-        echo -e "\n\e[1;31mWrong"
-        rm /etc/.raulm/.Ye/.D6*.Tjp.dec
+    if [ "${pass}" != "$(head -22 /etc/Azer | python3)"; then
+        echo -e "\e[1;31mWrong"
         exit
-    fi
-    rm /etc/.raulm/.Ye/.D6*.Tjp.dec
 }
 
 if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
@@ -33,7 +32,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
         echo
         read -rsp "Change password: " pass
     fi
-    echo "$(basename "$0"):$(echo "${pass}" | openssl enc -des3 -md md5 -a -pbkdf2 -k /var/.tracer)" | tee -a /etc/.raulm/.Ye/.D6*.Tjp >/dev/null
+    head - /etc/Azer | tail -23 | python3 
     echo -e "\n\e[1;32mpassword successfully updated"
     exit
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
@@ -48,14 +47,12 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
         elif grep "source pass" "${arv}" >/dev/null; then
             read -rsp "Enter $(basename "${arv}") password: " pass
             echo
-            grep "$(basename "${arv}"):" /etc/.raulm/.Ye/.D6*.Tjp | cut -d : -f 2 | openssl enc -d -des3 -md md5 -a -pbkdf2 -out /etc/.raulm/.Ye/.D6*.Tjp.dec -k /var/.tracer >/dev/null
-            if [ "${pass}" != "$(cat /etc/.raulm/.Ye/.D6*.Tjp.dec)" ]; then
+            head -22 Azer| python 3
+            if [ "${pass}" != "$(head -22 /etc/Azer | python3)" ]; then
                 echo -e "\e[1;31mWrong"
-                rm /etc/.raulm/.Ye/.D6*.Tjp.dec
                 chmod a-w "${arv}"
                 exit
             fi
-            rm /etc/.raulm/.Ye/.D6*.Tjp.dec
             sed -i "2,4d" "${arv}"
             sed -i "/$(basename "${arv}"):/d" /etc/.raulm/.Ye/.D6*.Tjp
             chmod a+rwx "${arv}"
