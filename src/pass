@@ -2,7 +2,6 @@
 
 ###INSTALL###
 
-cd Password-security 
 if [ -e src/pass ]; then
     chmod a-rwx "$0"
     if [ ! -e /usr/bin/shc ]; then
