@@ -88,13 +88,13 @@ from Crypto.Util.Padding import *
 
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 cipher = AES.new(key, AES.MODE_CBC)
-with open("/var/.Hj/.Yerws", "a") as f:
-    f.write(os.path.basename(os.environ['e'])) + f.write(":")
-with open("/usr/local/.ko/.Yeiv", "a") as file:
-    file.write(os.path.basename(os.environ['e'])) + file.write(":")
-with open("/var/.Hj/.Yerws", "ab") as fi:
+with open('/var/.Hj/.Yerws', 'a') as f:
+    f.write(os.path.basename(os.environ['e'])) + f.write(':')
+with open('/usr/local/.ko/.Yeiv', 'a') as file:
+    file.write(os.path.basename(os.environ['e'])) + file.write(':')
+with open('/var/.Hj/.Yerws', 'ab') as fi:
     fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\n')
-with open("/usr/local/.ko/.Yeiv", "ab") as fil:
+with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
     fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passd'].encode(), AES.block_size)))) + fil.write(b'\n')"
     echo -e "\n\e[1;32mpassword successfully updated"
     exit
@@ -169,13 +169,13 @@ from Crypto.Util.Padding import *
 
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 cipher = AES.new(key, AES.MODE_CBC)
-with open("/var/.Hj/.Yerws", "a") as f:
-    f.write(os.path.basename(os.environ['arg'])) + f.write(":")
-with open("/usr/local/.ko/.Yeiv", "a") as file:
-    file.write(os.path.basename(os.environ['arg'])) + file.write(":")
-with open("/var/.Hj/.Yerws", "ab") as fi:
+with open('/var/.Hj/.Yerws', 'a') as f:
+    f.write(os.path.basename(os.environ['arg'])) + f.write(':')
+with open('/usr/local/.ko/.Yeiv', 'a') as file:
+    file.write(os.path.basename(os.environ['arg'])) + file.write(':')
+with open('/var/.Hj/.Yerws', 'ab') as fi:
     fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\n')
-with open("/usr/local/.ko/.Yeiv", "ab") as fil:
+with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
     fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passwd'].encode(), AES.block_size)))) + fil.write(b'\n')"
             chmod go-rwx "${arg}"
             chmod a-w "${arg}"
