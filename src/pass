@@ -3,7 +3,7 @@
 ###INSTALL###
 
 if [ -e src/pass ]; then
-    chmod a-rwx "$0"
+    chmod go-rwx "$0"
     if [ ! -e /usr/bin/shc ]; then
         sudo apt -y install -y shc -y
     fi
@@ -12,28 +12,29 @@ if [ -e src/pass ]; then
     rm "$0".x.c
     mkdir /etc/.raulm
     mkdir /etc/.raulm/.Ye
-    chmod a-rwx /etc/.raulm
-    chmod u-w /etc/.raulm
+    chmod go-rwx /etc/.raulm
     mkdir /var/.Hj
-    chmod a-rwx /var/.Hj
-    chmod u-w /var/.Hj
+    chmod go-rwx /var/.Hj
     mkdir /usr/local/.Ko
-    chmod a-rwx /usr/local/.ko
-    chmod u-w /usr/local/.ko
+    chmod go-rwx /usr/local/.ko
     cp src/pass /usr/bin
+    
 fi
 
 #######
 
-python3 -c "if not os.path.exists('/etc/.raulm/.Ye/.key'):
+python3 -c "
+from hashlib import pbkdf2_hmac
+import os
+
+if not os.path.exists('/etc/.raulm/.Ye/.key'):
    open('/etc/.raulm/.Ye/.key', 'wb').write(pbkdf2_hmac('sha256', password=b'thisiswhat', salt=b'', iterations=100000, dklen=32))"
 
 check() {
-    if [ "${pass}" != "$(python3 -c "
+    dec=python3 -c "
 import os
 import sys
 import base64
-from hashlib import *
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
@@ -46,7 +47,8 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
   for lin in file:                                                                                                                                          
     if os.path.basename(sys.argv[0].encode()) in lin:
       cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
-print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode()))" ]; then
+print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode()"
+    if [ "${pass}" != "${}" ]; then
         echo -e "\e[1;31mWrong"
         exit
 }
@@ -69,7 +71,6 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
 import os
 import sys
 import base64
-from hashlib import *
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
@@ -98,11 +99,10 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
         elif grep "pass" "${arv}" >/dev/null; then
             read -rsp "Enter $(basename "${arv}") password: " pass
             echo
-            if [ "${pass}" != "$(python3 -c "
+            de_c=python3 -c "
 import os
 import sys
 import base64
-from hashlib import *
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
@@ -115,7 +115,9 @@ for n in range(1, len(sys.argv[2:])):
  with open('/var/.Hj/.Yerws', 'rb') as file:
   for lin in file:                                                                                                                                          if os.path.basename(sys.argv[n].encode()) in lin:
       cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
- print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())')" ]; then
+ print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode()"
+
+            if [ "${pass}" != "${de_c}" ]; then
                 echo -e "\e[1;31mWrong"
                 chmod a-w "${arv}"
                 exit
@@ -148,7 +150,6 @@ elif [ "$(basename "$0")" = "pass" ]; then
 import os
 import sys
 import base64
-from hashlib import *
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
@@ -162,8 +163,7 @@ for n in range(1, len(sys.argv)):
  with open('/usr/local/.Ko/.Yeiv', 'ab') as fb:
    fb.write(cipher.encrypt(pad(base64.b64encode(ciphe)), AES.block_size)) + fb.write(b'\n')
  with open('/var/.Hj/.Yerws', 'ab') as fbv:
-   fbv.write(base64.b64encode(ciphe.iv) + fbv.write(b'\n')
-"
+   fbv.write(base64.b64encode(ciphe.iv) + fbv.write(b'\n')"
             chmod go-rwx "${arg}"
             chmod a-w "${arg}"
             echo -e "\e[1;32m$(basename "${arg}") password successfully created\e[\n0m\n"
