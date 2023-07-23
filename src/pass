@@ -67,16 +67,20 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
 elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     read -rsp "Enter current password: " pass
     check
-    sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
     if trap '' SIGINT; then
         echo
         read -rsp "Change password: " passd
         if [[ "${#passd}" -lt 5 ]]; then
             echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
-            exit 1
+            read -rsp "Change password: " passd
+            if [[ "${#passd}" -lt 5 ]]; then
+                echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
+                exit 1
+            fi
         fi
         export passd 
     fi
+    sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
     python3 -c "
 import os
 import sys
@@ -152,18 +156,22 @@ elif [ "$(basename "$0")" = "pass" ]; then
             echo -e "\e[1m$(basename "${arg}") already secured\e[0m\n"
             chmod a-w "${arg}"
         elif ! grep "pass" "${arg}" >/dev/null; then
-            sed -i "2i\ \n# shellcheck source=/dev/null\nsource pass\n" "${arg}"
             if trap '' SIGINT; then
                 read -rsp "Creat $(basename "${arg}") password: " passwd
                 if [[ "${#passwd}" -lt 5 ]]; then
                     echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
+                    read -rsp "Creat $(basename "${arg}") password: " passwd
+                    if [[ "${#passwd}" -lt 5 ]]; then
+                        echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
+                        exit 1
+                    fi
                 fi
-                "${passwd}" * 3
                 echo
                 export passwd 
             fi
+            sed -i "2i\ \n# shellcheck source=/dev/null\nsource pass\n" "${arg}"
             python3 -c "
-import oso
+import os
 import sys
 import base64
 from Crypto.Cipher import AES
