@@ -4,14 +4,7 @@
 
 if [ -e src/pass ]; then
     chmod go-rwx "$0"
-    if [ ! -e /usr/bin/shc ]; then
-        sudo apt -y install -y shc -y
-    fi
-    shc -f "$0" -o "$0"
     chmod u-w "$0"
-fi
-if [ -e "$0.x.c" ]; then
-    rm "$0.x.c"
 fi
 if [ ! -e /bin/pass ]; then
     cp src/pass /bin
@@ -66,7 +59,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
 
 if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
     echo -e "\e[1mUsage:\e[0m pass [argument][file1][file2]...\n\nNo argument:\t\t\tSecure files or one file by password\n-r --remove:\t\t\t\tRemove security password from files\npass 'none':\t\t\t\tshow this help message\n\n\e[1mFor secured files:\nUsage:\e[0m [file][argument]\n\n-c --change:\t\t\t\tChange password\nNone:\t\t\t\tstart file with password\n\n\e[1me.g:\e[0m -c argument will not work in secured file so try to change it or use another one"
-elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ !(-c|--change) ]]; then
+elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
     read -rsp "Enter password: " pass
     check
     echo
@@ -105,7 +98,7 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arv}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
-        elif ! grep "pass" "${arv}" >/dev/null; then
+        elif ! grep "source pass" "${arv}" >/dev/null; then
             echo -e "\e[1m$(basename "${arv}") already not secured\e[0m\n"
             chmod a-w "${arv}"
         elif grep "pass" "${arv}" >/dev/null; then
@@ -150,11 +143,11 @@ elif [ "$(basename "$0")" = "pass" ]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arg}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
-        elif grep "pass" "${arg}" >/dev/null; then
+        elif grep "source pass" "${arg}" >/dev/null; then
             echo -e "\e[1m$(basename "${arg}") already secured\e[0m\n"
             chmod a-w "${arg}"
         elif ! grep "pass" "${arg}" >/dev/null; then
-            sed -i "2i\ \npass" "${arg}"
+            sed -i "2i\ \n# shellcheck source=/dev/null\nsource pass\n" "${arg}"
             if trap '' SIGINT; then
                 read -rsp "Creat $(basename "${arg}") password: " passwd
                 echo
