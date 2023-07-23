@@ -5,6 +5,7 @@
 if [ -e src/pass ]; then
     chmod go-rwx "$0"
     chmod u-w "$0"
+    chmod u+x "$0"
 fi
 if [ ! -e /bin/pass ]; then
     cp src/pass /bin
@@ -51,7 +52,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
             print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())")
 
     if [ "${pass}" != "${dec}" ]; then
-        echo -e "\e[1;31mWrong"
+        echo -e "\e[1;31m\nWrong"
         exit
     fi
 }
