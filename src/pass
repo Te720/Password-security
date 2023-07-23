@@ -83,8 +83,7 @@ with open('/var/.Hj/.Yerws', 'a') as fv:
 with open('/usr/local/.Ko/.Yeiv', 'ab') as fb:
    fb.write(cipher.encrypt(pad(base64.b64encode(ciphe)), AES.block_size)) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbv:
-   fbv.write(base64.b64encode(ciphe.iv) + fbv.write(b'\n')
-"
+   fbv.write(base64.b64encode(ciphe.iv) + fbv.write(b'\n')"
     echo -e "\n\e[1;32mpassword successfully updated"
     exit
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
