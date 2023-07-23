@@ -27,6 +27,9 @@ if not os.path.exists('/etc/.raulm/.Ye/.key'):
    open('/etc/.raulm/.Ye/.key', 'wb').write(pbkdf2_hmac('sha256', password=b'thisiswhat', salt=b'', iterations=100000, dklen=32))
 "
 
+e="$0"
+export e
+
 check() {
         dec=$(python3 -c "
 import os            
@@ -38,13 +41,13 @@ from Crypto.Util.Padding import *
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
     for line in fi:
-        if os.path.basename(sys.argv[0].encode()) in line:
+        if os.path.basename(os.environ['e'].encode()) in line:
             pass_hash = base64.b64decode(line.split(b':')[1].strip(b'\n'))
 with open('/var/.Hj/.Yerws', 'rb') as file:
     for lin in file:                                                                                                                                          
-        if os.path.basename(sys.argv[0].encode()) in lin:
-cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
-print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())")
+        if os.path.basename(os.environ['e'].encode()) in lin:
+            cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
+            print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())")
 
     if [ "${pass}" != "${dec}" ]; then
         echo -e "\e[1;31mWrong"
@@ -78,9 +81,9 @@ from Crypto.Util.Padding import *
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 cipher = AES.new(key, AES.MODE_CBC)
 with open('/usr/local/.ko/.Yeiv', 'a') as f:
-    f.write(os.path.basename(sys.argv[0])) + f.write(':')
+    f.write(os.path.basename(os.environ['e'].encode()) + f.write(':')
 with open('/var/.Hj/.Yerws', 'a') as fv:
-    fv.write(os.path.basename(sys.argv[0])) + fv.write(':')
+    fv.write(os.path.basename(os.environ['e'].encode()) + fv.write(':')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
     fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passd'])), AES.block_size)) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbv:
@@ -90,6 +93,7 @@ with open('/var/.Hj/.Yerws', 'ab') as fbv:
     exit
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
     for arv in "${@:2}"; do
+        export arv
         if [[ "${arv}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arv}" ]; then
@@ -108,16 +112,15 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
-for n in range(1, len(sys.argv[2:])):
-    with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
-        for line in fi:
-            if os.path.basename(sys.argv[n].encode()) in line:
-                pass_hash = base64.b64decode(line.split(b':')[1].strip(b'\n'))
-    with open('/var/.Hj/.Yerws', 'rb') as file:
-        for lin in file:                                                                                                                                          
-            if os.path.basename(sys.argv[n].encode()) in lin:
-                cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
-    print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())")
+with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
+    for line in fi:
+        if os.path.basename(os.environ['arv'].encode()) in line:
+            pass_hash = base64.b64decode(line.split(b':')[1].strip(b'\n'))
+with open('/var/.Hj/.Yerws', 'rb') as file:
+    for lin in file:                                                                                                                                          
+        if os.path.basename(os.environ['arv'].encode()) in lin:
+            cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
+            print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())")
 
             if [ "${pass}" != "${de_c}" ]; then
                 echo -e "\e[1;31mWrong"
@@ -135,6 +138,7 @@ for n in range(1, len(sys.argv[2:])):
     done
 elif [ "$(basename "$0")" = "pass" ]; then
     for arg in "$@"; do
+        export arg
         if [[ "${arg}" =~ ^(-[a-z]|-[A-Z]|-[0-9]|--[a-z]|--[A-Z]|--[0-9]) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arg}" ]; then
@@ -147,8 +151,8 @@ elif [ "$(basename "$0")" = "pass" ]; then
             if trap '' SIGINT; then
                 read -rsp "Creat $(basename "${arg}") password: " passwd
                 echo
+                export passwd 
             fi
-            export passwd
             python3 -c "
 import os
 import sys
@@ -158,14 +162,13 @@ from Crypto.Util.Padding import *
 
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 cipher = AES.new(key, AES.MODE_CBC)
-for n in range(1, len(sys.argv)):
-    with open('/usr/local/.ko/.Yeiv', 'a') as f:
-        f.write(os.path.basename(sys.argv[n])) + f.write(':')
-    with open('/var/.Hj/.Yerws', 'a') as fv:
-        fv.write(os.path.basename(sys.argv[n])) + fv.write(':')
-    with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
-        fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passwd'])), AES.block_size)) + fb.write(b'\n')
-    with open('/var/.Hj/.Yerws', 'ab') as fbv:
+with open('/usr/local/.ko/.Yeiv', 'a') as f:
+    f.write(os.path.basename(os.environ['arg'].encode()) + f.write(':')
+with open('/var/.Hj/.Yerws', 'a') as fv:
+    fv.write(os.path.basename(os.environ['arg'].encode()) + fv.write(':')
+with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
+    fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passwd'])), AES.block_size)) + fb.write(b'\n')
+with open('/var/.Hj/.Yerws', 'ab') as fbv:
         fbv.write(base64.b64encode(cipher.iv) + fbv.write(b'\n'))
             "
             chmod go-rwx "${arg}"
