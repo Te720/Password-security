@@ -93,7 +93,7 @@ with open('/usr/local/.ko/.Yeiv', 'a') as f:
 with open('/var/.Hj/.Yerws', 'a') as fi:
     fi.write(os.path.basename(os.environ['e'])) + fi.write(':')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
-    fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passd'])), AES.block_size)) + fb.write(b'\n')
+    fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passd'])), AES.block_size))) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbi:
     fbi.write(base64.b64encode(cipher.iv)) + fbi.write(b'\n')"
     echo -e "\n\e[1;32mpassword successfully updated"
@@ -174,7 +174,7 @@ with open('/usr/local/.ko/.Yeiv', 'a') as f:
 with open('/var/.Hj/.Yerws', 'a') as fi:
     fi.write(os.path.basename(os.environ['arg'])) + fi.write(':')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
-    fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passwd'].encode()), AES.block_size)) + fb.write(b'\n')
+    fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passwd'].encode()), AES.block_size))) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbi:
     fbi.write(base64.b64encode(cipher.iv)) + fbi.write(b'\n')"
             chmod go-rwx "${arg}"
