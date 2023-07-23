@@ -13,7 +13,10 @@ fi
 if [ -e "$0.x.c" ]; then
     rm "$0.x.c"
 fi
-if [ ! -e /etc/.raulm/.Ye ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ] && [ ! -e /bin/pass ]; then
+if [ ! -e /bin/pass ]; then
+    cp src/pass /var
+fi
+if [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm/.Ye ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
     mkdir /etc/.raulm
     mkdir /etc/.raulm/.Ye
     chmod go-rwx /etc/.raulm
@@ -21,7 +24,6 @@ if [ ! -e /etc/.raulm/.Ye ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ] && [
     chmod go-rwx /var/.Hj
     mkdir /usr/local/.ko
     chmod go-rwx /usr/local/.ko
-    cp src/pass /usr/bin
 fi
     
 #######
@@ -33,7 +35,8 @@ if not os.path.exists('/etc/.raulm/.Ye/.key'):
    open('/etc/.raulm/.Ye/.key', 'wb').write(pbkdf2_hmac('sha256', password=b'thisiswhat', salt=b'', iterations=100000, dklen=32))
 "
 
-export e="$0"
+e="$0"
+export e
 
 check() {
         dec=$(python3 -c "
