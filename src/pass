@@ -73,7 +73,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
         read -rsp "Change password: " passd
         if [[ "${#passd}" -lt 5 ]]; then
             echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
-            SIGINT
+            exit 1
         fi
         export passd 
     fi
@@ -157,7 +157,7 @@ elif [ "$(basename "$0")" = "pass" ]; then
                 read -rsp "Creat $(basename "${arg}") password: " passwd
                 if [[ "${#passwd}" -lt 4 ]]; then
                     echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
-                    SIGINT
+                    exit 1
                 fi
                 echo
                 export passwd 
