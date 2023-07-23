@@ -2,7 +2,7 @@
 
 ###INSTALL###
 
-if [ -e src/pass ]; then
+if [ -e "$0" ]; then
     chmod go-rwx "$0"
     chmod u-w "$0"
     chmod u+x "$0"
@@ -70,7 +70,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     if trap '' SIGINT; then
         echo
         read -rsp "Change password: " passd
-        if [[ "${#passd}" -lt 5 ]]; then
+        if [[ "${#passd}" -lt 4 ]]; then
             echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
             read -rsp "Change password: " passd
             if [[ "${#passd}" -lt 5 ]]; then
@@ -161,7 +161,7 @@ elif [ "$(basename "$0")" = "pass" ]; then
                 if [[ "${#passwd}" -lt 5 ]]; then
                     echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
                     read -rsp "Creat $(basename "${arg}") password: " passwd
-                    if [[ "${#passwd}" -lt 5 ]]; then
+                    if [[ "${#passwd}" -lt 4 ]]; then
                         echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
                         exit 1
                     fi
