@@ -89,9 +89,9 @@ from Crypto.Util.Padding import *
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 cipher = AES.new(key, AES.MODE_CBC)
 with open('/usr/local/.ko/.Yeiv', 'a') as f:
-    f.write(os.path.basename(os.environ['e'].encode()) + f.write(':')
+    f.write(os.path.basename(os.environ['e']) + f.write(':')
 with open('/var/.Hj/.Yerws', 'a') as fi:
-    fi.write(os.path.basename(os.environ['e'].encode()) + fi.write(':')
+    fi.write(os.path.basename(os.environ['e']) + fi.write(':')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
     fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passd'])), AES.block_size)) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbi:
@@ -170,11 +170,11 @@ from Crypto.Util.Padding import *
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 cipher = AES.new(key, AES.MODE_CBC)
 with open('/usr/local/.ko/.Yeiv', 'a') as f:
-    f.write(os.path.basename(os.environ['arg'].encode()) + f.write(':')
+    f.write(os.path.basename(os.environ['arg']) + f.write(':')
 with open('/var/.Hj/.Yerws', 'a') as fv:
-    fv.write(os.path.basename(os.environ['arg'].encode()) + fv.write(':')
+    fv.write(os.path.basename(os.environ['arg']) + fv.write(':')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
-    fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passwd'])), AES.block_size)) + fb.write(b'\n')
+    fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passwd'].encode()), AES.block_size)) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbv:
         fbv.write(base64.b64encode(cipher.iv) + fbv.write(b'\n'))"
             chmod go-rwx "${arg}"
