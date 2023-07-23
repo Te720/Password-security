@@ -71,7 +71,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     if trap '' SIGINT; then
         echo
         read -rsp "Change password: " passd
-        if [[ "${#passd}" -gt 4 ]]; then
+        if [[ "${#passd}" -lt 5 ]]; then
             echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
             kill -INT 888
         fi
@@ -155,7 +155,7 @@ elif [ "$(basename "$0")" = "pass" ]; then
             sed -i "2i\ \n# shellcheck source=/dev/null\nsource pass\n" "${arg}"
             if trap '' SIGINT; then
                 read -rsp "Creat $(basename "${arg}") password: " passwd
-                if [[ "${#passwd}" -gt 4 ]]; then
+                if [[ "${#passwd}" -lt 4 ]]; then
                     echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
                     kill -INT 888
                 fi
