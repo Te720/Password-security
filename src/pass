@@ -66,7 +66,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
 
 if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
     echo -e "\e[1mUsage:\e[0m pass [argument][file1][file2]...\n\nNo argument:\t\t\tSecure files or one file by password\n-r --remove:\t\t\t\tRemove security password from files\npass 'none':\t\t\t\tshow this help message\n\n\e[1mFor secured files:\nUsage:\e[0m [file][argument]\n\n-c --change:\t\t\t\tChange password\nNone:\t\t\t\tstart file with password\n\n\e[1me.g:\e[0m -c argument will not work in secured file so try to change it or use another one"
-elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
+elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ !(-c|--change) ]]; then
     read -rsp "Enter password: " pass
     check
     echo
