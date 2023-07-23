@@ -16,7 +16,7 @@ bash src/pass
 
 git clone https://github.com/Te720/Password-security.git && cd Password-security && bash src/pass
 
-excute the script in his folder will install requirements and copy everything alone
+excute the script will install requirements and copy everything alone
 
 # Help
 
