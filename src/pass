@@ -95,7 +95,7 @@ with open('/var/.Hj/.Yerws', 'a') as fi:
 with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
     fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passd'])), AES.block_size)) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbi:
-    fbi.write(base64.b64encode(cipher.iv) + fbi.write(b'\n')"
+    fbi.write(base64.b64encode(cipher.iv)) + fbi.write(b'\n')"
     echo -e "\n\e[1;32mpassword successfully updated"
     exit
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
@@ -176,7 +176,7 @@ with open('/var/.Hj/.Yerws', 'a') as fi:
 with open('/usr/local/.ko/.Yeiv', 'ab') as fb:
     fb.write(cipher.encrypt(pad(base64.b64encode(os.environ['passwd'].encode()), AES.block_size)) + fb.write(b'\n')
 with open('/var/.Hj/.Yerws', 'ab') as fbi:
-        fbi.write(base64.b64encode(cipher.iv) + fbi.write(b'\n')"
+    fbi.write(base64.b64encode(cipher.iv)) + fbi.write(b'\n')"
             chmod go-rwx "${arg}"
             chmod a-w "${arg}"
             echo -e "\e[1;32m$(basename "${arg}") password successfully created\e[\n0m\n"
