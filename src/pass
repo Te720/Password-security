@@ -2,6 +2,7 @@
 
 ###INSTALL###
 
+cd Password-security 
 if [ -e src/pass ]; then
     chmod a-rwx "$0"
     if [ ! -e /usr/bin/shc ]; then
@@ -41,7 +42,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
 elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
     read -rsp "Enter current password: " pass
     check
-    sed -i "/$(basename "$0"):/d" usr/local/.Ko/.Yeiv /var/.Hj/.Yerws
+    sed -i "/$(basename "$0"):/d" /usr/local/.Ko/.Yeiv /var/.Hj/.Yerws
     if trap '' SIGINT; then
         echo
         read -rsp "Change password: " pass
@@ -68,9 +69,12 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
                 exit
             fi
             sed -i "2,4d" "${arv}"
-            sed -i "/$(basename "${arv}"):/d" /etc/.raulm/.Ye/.D6*.Tjp
+            sed -i "/$(basename "${arv}"):/d" /var/.Hj/.Yerws /usr/local/.Ko/.Yeiv
             chmod a+rwx "${arv}"
             echo -e "\e[1;33m$(basename "${arv}") security desabled\e[\n0m\n"
+            if [ ! -s /var/.Hj/.Yerws ] && [  ! -s /usr/local/.Ko/.Yeiv ]; then
+                rm /var/.Hj/.Yerws /usr/local/.Ko/.Yeiv
+            fi
         fi
     done
 elif [ "$(basename "$0")" = "pass" ]; then
