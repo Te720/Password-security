@@ -48,7 +48,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
     if os.path.basename(sys.argv[0].encode()) in lin:
       cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
 print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode()"
-    if [ "${pass}" != "${}" ]; then
+    if [ "${pass}" != "${dec}" ]; then
         echo -e "\e[1;31mWrong"
         exit
 }
