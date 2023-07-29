@@ -166,7 +166,7 @@ elif [ "$(basename "$0")" = "pass" ]; then
                     echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
                     read -rsp "Creat $(basename "${arg}") password: " passwd
                     if [[ "${#passwd}" -lt 4 ]]; then
-                        echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
+                        echo -e "\n\e[1;31mpassword must be more then 4 digits\n\nFailed\e[0m"
                         exit 1
                     fi
                 fi
