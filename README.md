@@ -1,4 +1,4 @@
-# Password-security
+# File-password-security
 
 This is a script, which secure sh files by password GNU .
 
