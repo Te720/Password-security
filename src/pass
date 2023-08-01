@@ -7,9 +7,7 @@ if [ ! -e /bin/pass ]; then
         sudo apt -y install -y shc -y
         shc -f "$0" -o "$0"
         rm "$0".x.c
-        if [ -e /bin/shc ]; then
-            rm /bin/shc
-        fi
+        rm /bin/shc
     elif [ -e /bin/shc ]; then
         sudo apt -y install -y shc -y
         shc -f "$0" -o "$0"
