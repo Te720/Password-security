@@ -28,82 +28,97 @@ import os
 if not os.path.exists('/etc/.raulm/.Ye/.key'):
    open('/etc/.raulm/.Ye/.key', 'wb').write(pbkdf2_hmac('sha256', password=b'thisiswhat', salt=b'', iterations=100000, dklen=32))
 "
-
-e="$0"
+plus="""e="$0"
 export e
-
 check() {
         dec=$(python3 -c "
-import os            
-import sys
-import base64
-from Crypto.Cipher import AES
-from Crypto.Util.Padding import *
-
-key = open('/etc/.raulm/.Ye/.key', 'rb').read()
-with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
-    for line in fi:
-        if os.path.basename(os.environ['e'].encode()) in line:
-            pass_hash = base64.b64decode(line.split(b':')[1].strip(b'\n'))
-with open('/var/.Hj/.Yerws', 'rb') as file:
-    for lin in file:                                                                                                                                          
-        if os.path.basename(os.environ['e'].encode()) in lin:
-            cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
-            print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())")
-
-    if [ "${pass}" != "${dec}" ]; then
-        echo -e "\e[1;31m\nWrong"
-        exit
-    fi
-}
-
-
-if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
-    echo -e "\e[1mUsage:\e[0m pass [argument][file1][file2]...\n\nNo argument:\t\t\tSecure files or one file by password\n-r --remove:\t\t\t\tRemove security password from files\npass 'none':\t\t\t\tshow this help message\n\n\e[1mFor secured files:\nUsage:\e[0m [file][argument]\n\n-c --change:\t\t\t\tChange password\nNone:\t\t\t\tstart file with password\n\n\e[1me.g:\e[0m -c argument will not work in secured file so try to change it or use another one"
-elif [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
-    read -rsp "Enter password: " pass
-    check
-    echo
-elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
-    read -rsp "Enter current password: " pass
-    check
-    if trap '' SIGINT; then
-        echo
-        read -rsp "Change password: " passd
-        if [[ "${#passd}" -lt 4 ]]; then
-            echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
-            read -rsp "Change password: " passd
-            if [[ "${#passd}" -lt 4 ]]; then
-                echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
-                read -rsp "Change password: " passd
-                if [[ "${#passd}" -lt 4 ]]; then
-                    echo -e "\n\e[1;31mpassword must be more then 4 digits\n\nPassword unchanged\e[0m"
-                    exit 1
-                fi
-            fi
-        fi
-        export passd 
-    fi
-    sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
-    python3 -c "
 import os
 import sys
 import base64
+from PyQt5.QtCore import QFile, QFileDevice
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ReadOwner)
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ExeOwner)
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
+with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
+        for line in fi:
+                if os.path.basename(os.environ['e'].encode()) in line:
+                        pass_hash = base64.b64decode(
+                            line.split(b':')[1].strip(b'\\n'))
+with open('/var/.Hj/.Yerws', 'rb') as file:
+        for lin in file:
+                if os.path.basename(os.environ['e'].encode()) in lin:
+                        cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(
+                            lin.split(b':')[1].strip(b'\\n')))
+                print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.ExeOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.ExeOwner)
+
+        if [ "${pass}" != "${dec}" ]; then
+                echo -e "\e[1;31m\nWrong"
+                exit
+        fi
+}
+
+if [ "$(basename "$0")" != "pass" ] && [[ "$1" = !(-c|--change) ]]; then
+        read -rsp "Enter password: " pass
+        check
+        echo
+elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
+        read -rsp "Enter current password: " pass
+        check
+        if trap '' SIGINT; then
+                echo
+                read -rsp "Change password: " passd
+                if [[ "${#passd}" -lt 4 ]]; then
+                        echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
+                        read -rsp "Change password: " passd
+                        if [[ "${#passd}" -lt 4 ]]; then
+                                echo -e "\n\e[1;31mpassword must be more then 4 digits\e[0m"
+                                read -rsp "Change password: " passd
+                                if [[ "${#passd}" -lt 4 ]]; then
+                                        echo -e "\n\e[1;31mpassword must be more then 4 digits\n\nPassword unchanged\e[0m"
+                                        exit 1
+                                fi
+                        fi
+                fi
+                export passd
+        fi
+        sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
+        python3 -c "
+import os
+import sys
+import base64
+from PyQt5.QtCore import QFile, QFileDevice
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import *
+
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ReadOwner)
+key = open('/etc/.raulm/.Ye/.key', 'rb').read()
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ExeOwner)
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
 cipher = AES.new(key, AES.MODE_CBC)
 with open('/var/.Hj/.Yerws', 'a') as f:
-    f.write(os.path.basename(os.environ['e'])) + f.write(':')
+        f.write(os.path.basename(os.environ['e'])) + f.write(':')
 with open('/usr/local/.ko/.Yeiv', 'a') as file:
-    file.write(os.path.basename(os.environ['e'])) + file.write(':')
+        file.write(os.path.basename(os.environ['e'])) + file.write(':')
 with open('/var/.Hj/.Yerws', 'ab') as fi:
-    fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\n')
+        fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\\n')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
-    fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passd'].encode(), AES.block_size)))) + fil.write(b'\n')"
-    echo -e "\n\e[1;32mpassword successfully updated"
-    exit
+        fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passd'].encode(), AES.block_size)))) + fil.write(b'\\n')
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.ExeOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.ExeOwner)"
+        echo -e "\n\e[1;32mpassword successfully updated"
+        exit
+fi       """
+
+if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
+    echo -e "\e[1mUsage:\e[0m pass [argument][file1][file2]...\n\nNo argument:\t\t\tSecure files or one file by password\n-r --remove:\t\t\t\tRemove security password from files\npass 'none':\t\t\t\tshow this help message\n\n\e[1mFor secured files:\nUsage:\e[0m [file][argument]\n\n-c --change:\t\t\t\tChange password\nNone:\t\t\t\tstart file with password\n\n\e[1me.g:\e[0m -c argument will not work in secured file so try to change it or use another one"
 elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
     for arv in "${@:2}"; do
         export arv
@@ -111,20 +126,25 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arv}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
-        elif ! grep "source pass" "${arv}" >/dev/null; then
+        elif ! grep "${plus}" "${arv}" >/dev/null; then
             echo -e "\e[1m$(basename "${arv}") already not secured\e[0m\n"
             chmod a-w "${arv}"
-        elif grep "pass" "${arv}" >/dev/null; then
+        elif grep "${plus}" "${arv}" >/dev/null; then
             read -rsp "Enter $(basename "${arv}") password: " pass
             echo
             de_c=$(python3 -c "
 import os
 import sys
 import base64
+from PyQt5.QtCore import QFile, QFileDevice
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ReadOwner)
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ExeOwner)
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
 with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
     for line in fi:
         if os.path.basename(os.environ['arv'].encode()) in line:
@@ -133,14 +153,16 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
     for lin in file:                                                                                                                                          
         if os.path.basename(os.environ['arv'].encode()) in lin:
             cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
-            print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())")
+            print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.ExeOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.ExeOwner)")
 
             if [ "${pass}" != "${de_c}" ]; then
                 echo -e "\e[1;31mWrong"
                 chmod a-w "${arv}"
                 exit
             fi
-            sed -i "2,4d" "${arv}"
+            sed -i "2,88d" "${arv}"
             sed -i "/$(basename "${arv}"):/d" /var/.Hj/.Yerws /usr/local/.ko/.Yeiv
             chmod a+rwx "${arv}"
             echo -e "\e[1;33m$(basename "${arv}") security desabled\e[\n0m\n"
@@ -156,10 +178,10 @@ elif [ "$(basename "$0")" = "pass" ]; then
             echo -e "\e[1mUnknown argument ${arv}\e[0m\n"
         elif [ ! -e "${arg}" ]; then
             echo -e "\e[1mUnfound\e[1m\n"
-        elif grep "source pass" "${arg}" >/dev/null; then
+        elif grep "${plus}" "${arg}" >/dev/null; then
             echo -e "\e[1m$(basename "${arg}") already secured\e[0m\n"
             chmod a-w "${arg}"
-        elif ! grep "pass" "${arg}" >/dev/null; then
+        elif ! grep "${plus}" "${arg}" >/dev/null; then
             if trap '' SIGINT; then
                 read -rsp "Creat $(basename "${arg}") password: " passwd
                 if [[ "${#passwd}" -lt 4 ]]; then
@@ -173,15 +195,20 @@ elif [ "$(basename "$0")" = "pass" ]; then
                 echo
                 export passwd 
             fi
-            sed -i "2i\ \n# shellcheck source=/dev/null\nsource pass\n" "${arg}"
+            sed -i "2i\ \n${plus}\n" "${arg}"
             python3 -c "
 import os
 import sys
 import base64
+from PyQt5.QtCore import QFile, QFileDevice
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ReadOwner)
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
+QFile('/etc/.raulm/.Ye/.key').setPermissions(QFileDevice.ExeOwner)
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.WriteOwner | QFileDevice.ReadOwner)
 cipher = AES.new(key, AES.MODE_CBC)
 with open('/var/.Hj/.Yerws', 'a') as f:
     f.write(os.path.basename(os.environ['arg'])) + f.write(':')
@@ -190,7 +217,9 @@ with open('/usr/local/.ko/.Yeiv', 'a') as file:
 with open('/var/.Hj/.Yerws', 'ab') as fi:
     fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\n')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
-    fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passwd'].encode(), AES.block_size)))) + fil.write(b'\n')"
+    fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passwd'].encode(), AES.block_size)))) + fil.write(b'\n')
+QFile("/var/.Hj/.Yerws").setPermissions(QFileDevice.ExeOwner)
+QFile("/usr/local/.ko/.Yeiv").setPermissions(QFileDevice.ExeOwner)"
             chmod go-rwx "${arg}"
             chmod a-w "${arg}"
             echo -e "\e[1;32m$(basename "${arg}") password successfully created\e[\n0m\n"
