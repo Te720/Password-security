@@ -34,7 +34,7 @@ if not os.path.exists('/etc/.raulm/.Ye/.key'):
 plus="""$(e="$0"
 export e
 check() {
-        dec=$(python3 -c "
+        dec=""$(python3 -c "
 import os
 import sys
 import base64
@@ -55,7 +55,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
                         cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(
                             lin.split(b':')[1].strip(b'\\n')))
                 print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())
-os.system('chmod a-rw /etc/.raulm/.Ye/.key /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')
+os.system('chmod a-rw /etc/.raulm/.Ye/.key /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')")""
 
         if [ "${pass}" != "${dec}" ]; then
                 echo -e "\e[1;31m\nWrong"
@@ -87,6 +87,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
                 fi
                 export passd
         fi
+        os.system('chmod u+rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')
         sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
         python3 -c "
 import os
@@ -97,7 +98,6 @@ from Crypto.Util.Padding import *
 
 os.system('chmod u+r /etc/.raulm/.Ye/.key')
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
-os.system('chmod u+rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')
 cipher = AES.new(key, AES.MODE_CBC)
 with open('/var/.Hj/.Yerws', 'a') as f:
         f.write(os.path.basename(os.environ['e'])) + f.write(':')
@@ -127,7 +127,7 @@ elif [ "$(basename "$0")" = "pass" ] && [[ "$1" =~ ^(-r|--remove) ]]; then
         elif grep "${plus}" "${arv}" >/dev/null; then
             read -rsp "Enter $(basename "${arv}") password: " pass
             echo
-            de_c=$(python3 -c "
+            de_c=""$(python3 -c "
 import os
 import sys
 import base64
@@ -146,7 +146,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
         if os.path.basename(os.environ['arv'].encode()) in lin:
             cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
             print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())
-os.system('chmod a-rw /etc/.raulm/.Ye/.key /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')")
+os.system('chmod a-rw /etc/.raulm/.Ye/.key /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')")""
 
             if [ "${pass}" != "${de_c}" ]; then
                 echo -e "\e[1;31mWrong"
