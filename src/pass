@@ -13,7 +13,7 @@ if [ ! -e /bin/pass ]; then
         shc -f "$0" -o "$0"
         rm "$0".x.c
     fi
-    if false; then
+    if False; then
         echo -e "\e[1;31mError install"
         rm "$0"
     fi
