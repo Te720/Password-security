@@ -1,6 +1,6 @@
 # Password-security
 
-This is a script, which secure files by password GNU.
+This is a script, which secure sh files by password GNU .
 
 # Install
 
@@ -16,8 +16,8 @@ bash src/pass
 
 git clone https://github.com/Te720/Password-security.git && cd Password-security && bash src/pass
 
-excute the script will install requirements and copy everything alone
+excute the script will install requirements and copy everything alone .
 
 # Help
 
-Excute pass in the terminal for see help
+Excute pass in the terminal for see help .
