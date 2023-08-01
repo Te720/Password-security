@@ -13,9 +13,10 @@ if [ ! -e /bin/pass ]; then
         shc -f "$0" -o "$0"
         rm "$0".x.c
     fi
-    if not true; then
+    if [ ! -e /bin/shc ]; then
         echo -e "\e[1;31mError install"
         rm "$0"
+        exit 1
     fi
     chmod a-rwx "$0"
     chmod u+x "$0"
@@ -89,7 +90,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
                                 read -rsp "Change password: " passd
                                 if [[ "${#passd}" -lt 4 ]]; then
                                         echo -e "\n\e[1;31mpassword must be more then 4 digits\n\nPassword unchanged\e[0m"
-                                        exit 1
+                                        exit 0
                                 fi
                         fi
                 fi
@@ -188,7 +189,7 @@ elif [ "$(basename "$0")" = "pass" ]; then
                     read -rsp "Creat $(basename "${arg}") password: " passwd
                     if [[ "${#passwd}" -lt 4 ]]; then
                         echo -e "\n\e[1;31mpassword must be more then 4 digits\n\nFailed\e[0m"
-                        exit 1
+                        exit 0
                     fi
                 fi
                 echo
