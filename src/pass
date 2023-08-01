@@ -15,8 +15,7 @@ if [ ! -e /bin/pass ]; then
         shc -f "$0" -o "$0"
         rm "$0".x.c
     fi
-    chmod go-rwx "$0"
-    chmod u-w "$0"
+    chmod a-rwx "$0"
     chmod u+x "$0"
     cp "$0" /bin
 fi
