@@ -5,11 +5,12 @@
 if [ ! -e /bin/pass ]; then
     if [ ! -e /bin/shc ]; then
         sudo apt -y install -y shc -y
-        shc -f "$0" -o "$0"
-        rm "$0".x.c
-        rm /bin/shc
+        if [ -e /bin/shc ]; then
+            shc -f "$0" -o "$0"
+            rm "$0".x.c
+            rm /bin/shc
+    fi
     else
-        sudo apt -y install -y shc -y
         shc -f "$0" -o "$0"
         rm "$0".x.c
     fi
