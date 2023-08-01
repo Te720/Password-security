@@ -16,7 +16,8 @@ if [ ! -e /bin/pass ]; then
     fi
     if [ ! -e /bin/shc ]; then
         echo -e "\e[1;31mError install"
-        rm "$0"
+        cd
+        rm -rf Password-security 
         exit 1
     fi
     chmod a-rwx "$0"
