@@ -5,9 +5,16 @@
 if [ ! -e /bin/pass ]; then
     if [ ! -e /bin/shc ]; then
         sudo apt -y install -y shc -y
+        shc -f "$0" -o "$0"
+        rm "$0".x.c
+        if [ -e /bin/shc ]; then
+            rm /bin/shc
+        fi
+    elif [ -e /bin/shc ]; then
+        sudo apt -y install -y shc -y
+        shc -f "$0" -o "$0"
+        rm "$0".x.c
     fi
-    shc -f "$0" -o "$0"
-    rm "$0".x.c
     chmod go-rwx "$0"
     chmod u-w "$0"
     chmod u+x "$0"
