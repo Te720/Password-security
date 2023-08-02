@@ -94,7 +94,7 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
         fi
         chmod u+rw /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
         sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
-        python3 -c """
+        python3 -c "
 import os
 import sys
 import base64
@@ -113,7 +113,7 @@ with open('/var/.Hj/.Yerws', 'ab') as fi:
         fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\\n')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
         fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passd'].encode(), AES.block_size)))) + fil.write(b'\\n')
-os.system('chmod a-rwx /var/.Hj /usr/local/.ko /etc/.raulm')"""
+os.system('chmod a-rwx /var/.Hj /usr/local/.ko /etc/.raulm')"
         echo -e "\n\e[1;32mpassword successfully updated"
         exit
 fi       """
