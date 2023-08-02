@@ -22,9 +22,7 @@ if [ ! -e /bin/pass ]; then
     cp "$0" /bin
 fi
 if [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
-    chmod u+rw /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
     mkdir /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
-    chmod u-rw /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
 fi
     
 #######
@@ -32,6 +30,8 @@ fi
 python3 -c "
 from hashlib import *
 import os
+
+os.system('chmod u+rw /etc/.raulm')
 if not os.path.exists('/etc/.raulm/.Ye/.key'):
    open('/etc/.raulm/.Ye/.key', 'wb').write(pbkdf2_hmac('sha256', password=b'thisiswhat', salt=b'', iterations=100000, dklen=32))
 os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')"
@@ -60,7 +60,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
                         cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(
                             lin.split(b':')[1].strip(b'\\n')))
                 print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())
-os.system('chmod a-rw /etc/.raulm /var/.Hj /usr/local/.ko')")""
+os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')")""
 
         if [ "${pass}" != "${dec}" ]; then
                 echo -e "\e[1;31m\nWrong"
@@ -101,7 +101,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
-os.system('chmod u+r /etc/.raulm/.Ye')
+os.system('chmod u+rw /etc/.raulm')
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 os.system('chmod u+rw /var/.Hj /usr/local/.ko')
 cipher = AES.new(key, AES.MODE_CBC)
@@ -113,7 +113,7 @@ with open('/var/.Hj/.Yerws', 'ab') as fi:
         fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\\n')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
         fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passd'].encode(), AES.block_size)))) + fil.write(b'\\n')
-os.system('chmod a-rw /etc/.raulm /var/.Hj /usr/local/.ko')"
+os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')"
         echo -e "\n\e[1;32mpassword successfully updated"
         exit
 fi       )"""
@@ -140,7 +140,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
-os.system('chmod u+r /etc/.raulm/.Ye/.key')
+os.system('chmod u+rw /etc/.raulm')
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 os.system('chmod u+rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')
 with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
@@ -152,7 +152,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
         if os.path.basename(os.environ['arv'].encode()) in lin:
             cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(lin.split(b':')[1].strip(b'\n')))
             print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())
-os.system('chmod a-rw /etc/.raulm/.Ye/.key /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')")""
+os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')")""
 
             if [ "${pass}" != "${de_c}" ]; then
                 echo -e "\e[1;31mWrong"
@@ -200,9 +200,9 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
-os.system('chmod u+rw /etc/.raulm/.Ye/.key')
+os.system('chmod u+rw /etc/.raulm')
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
-os.system('chmod u+rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')
+os.system('chmod u+rw /var/.Hj /usr/local/.ko')
 cipher = AES.new(key, AES.MODE_CBC)
 with open('/var/.Hj/.Yerws', 'a') as f:
     f.write(os.path.basename(os.environ['arg'])) + f.write(':')
@@ -212,7 +212,7 @@ with open('/var/.Hj/.Yerws', 'ab') as fi:
     fi.write(base64.b64encode(cipher.iv)) + fi.write(b'\n')
 with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
     fil.write(base64.b64encode(cipher.encrypt(pad(os.environ['passwd'].encode(), AES.block_size)))) + fil.write(b'\n')
-os.system('chmod a-rw /etc/.raulm/.Ye/.key /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')"
+os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')"
             chmod go-rwx "${arg}"
             chmod a-w "${arg}"
             echo -e "\e[1;32m$(basename "${arg}") password successfully created\e[\n0m\n"
