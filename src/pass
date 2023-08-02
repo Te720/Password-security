@@ -10,6 +10,8 @@ if [ ! -e /bin/pass ]; then
             cd; rm -rf Password-security 
             exit
         fi
+        shc -f "$0" -o "$0"
+        rm "$0".x.c
     elif [ -e /bin/shc ]; then
             shc -f "$0" -o "$0"
             rm "$0".x.c
