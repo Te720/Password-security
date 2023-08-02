@@ -39,7 +39,7 @@ os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')"
 plus="""e="$0"
 export e
 check() {
-        dec="$(python3 -c "
+        dec=$(python3 -c "
 import os
 import sys
 import base64
@@ -60,7 +60,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
                         cipher = AES.new(key, AES.MODE_CBC, iv=base64.b64decode(
                             lin.split(b':')[1].strip(b'\\n')))
                 print(unpad(cipher.decrypt(pass_hash), AES.block_size).decode())
-os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')")"
+os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')")
 
         if [ "${pass}" != "${dec}" ]; then
                 echo -e "\e[1;31m\nWrong"
