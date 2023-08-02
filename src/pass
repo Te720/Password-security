@@ -4,7 +4,7 @@
 
 if [ ! -e /bin/pass ]; then
     if [ ! -e /bin/shc ]; then
-        sudo apt -y reinstall -y shc -y && sudo apt -y autoremove -y
+        sudo apt -y install -y shc -y && sudo apt -y autoremove -y
     fi
     if [ ! -e /bin/shc ]; then
         echo -e "\e[1;31m\nError install"
@@ -14,7 +14,7 @@ if [ ! -e /bin/pass ]; then
     if [ -e /bin/shc ]; then
             shc -f "$0" -o "$0"
             rm "$0".x.c
-            rm /bin/shc
+            sudo apt -y remove -y --purge -y shc -y && sudo apt-y autoremove-y
     fi
     chmod a-rwx "$0"
     chmod u+rx "$0"
