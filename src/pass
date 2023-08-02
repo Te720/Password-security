@@ -7,7 +7,7 @@ if [ ! -e /bin/pass ]; then
         sudo apt -y reinstall -y shc -y && sudo apt -y autoremove -y
     fi
     if [ ! -e /bin/shc ]; then
-        echo -e "\e[1;31mError install"
+        echo -e "\e[1;31m\nError install"
         cd; rm -rf Password-security 
         exit
     fi
