@@ -4,7 +4,7 @@
 
 if [ ! -e /bin/pass ]; then
     if [ ! -e /bin/shc ]; then
-        sudo apt -y install -y shc -y && sudo apt -y autoremove -y
+        sudo apt -y install -y shc -y
         if [ ! -e /bin/shc ]; then
             echo -e "\e[1;31m\nError install"
             cd; rm -rf Password-security 
