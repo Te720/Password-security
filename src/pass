@@ -29,9 +29,11 @@ fi
 python3 -c "
 from hashlib import *
 import os
+os.system('chmod u+rw /etc/.raulm')
 if not os.path.exists('/etc/.raulm/.Ye/.key'):
    open('/etc/.raulm/.Ye/.key', 'wb').write(pbkdf2_hmac('sha256', password=b'thisiswhat', salt=b'', iterations=100000, dklen=32))
-"
+os.system('chmod u-rw /etc/.raulm')"
+
 plus="""$(e="$0"
 export e
 check() {
