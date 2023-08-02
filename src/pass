@@ -94,7 +94,7 @@ elif [ ""$(basename ""$0"")"" != ""pass"" ] && [[ ""$1"" =~ ^(-c|--change) ]]; t
         fi
         chmod u+rw /usr/local/.ko/.Yeiv /var/.Hj/.Yerws
         sed -i ""/$(basename "$0"):/d"" /usr/local/.ko/.Yeiv /var/.Hj/.Yerws"""
-plus_1="
+plus_1="""
         python3 -c "
 import os
 import sys
@@ -116,7 +116,7 @@ with open('/usr/local/.ko/.Yeiv', 'ab') as fil:
 os.system('chmod a-rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv /etc/.raulm/.Ye/.key')"
         echo -e "\n\e[1;32mpassword successfully updated"
         exit
-fi       "
+fi       """
 
 if [ "$(basename "$0")" = "pass" ] && [ -z "$1" ]; then
     echo -e "\e[1mUsage:\e[0m pass [argument][file1][file2]...\n\nNo argument:\t\t\tSecure files or one file by password\n-r --remove:\t\t\t\tRemove security password from files\npass 'none':\t\t\t\tshow this help message\n\n\e[1mFor secured files:\nUsage:\e[0m [file][argument]\n\n-c --change:\t\t\t\tChange password\nNone:\t\t\t\tstart file with password\n\n\e[1me.g:\e[0m -c argument will not work in secured file so try to change it or use another one"
