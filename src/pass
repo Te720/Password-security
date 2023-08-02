@@ -23,7 +23,6 @@ if [ ! -e /bin/pass ]; then
 fi
 if [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
     mkdir /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
-    chmod a-rwx /etc/.raulm  /var/.Hj  /usr/local/.ko
 fi
     
 #######
@@ -31,11 +30,9 @@ fi
 python3 -c "
 from hashlib import *
 import os
-os.system('chmod u+rw /etc/.raulm')
 if not os.path.exists('/etc/.raulm/.Ye/.key'):
-   os.system('touch /etc/.raulm/.Ye/.key')
    open('/etc/.raulm/.Ye/.key', 'wb').write(pbkdf2_hmac('sha256', password=b'thisiswhat', salt=b'', iterations=100000, dklen=32))
-os.system('chmod u-rw /etc/.raulm')"
+os.system('chmod a-rwx /etc/.raulm /var/.Hj /usr/local/.ko')"
 
 plus="""$(e="$0"
 export e
