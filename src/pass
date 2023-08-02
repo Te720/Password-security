@@ -63,7 +63,7 @@ with open('/var/.Hj/.Yerws', 'rb') as file:
 os.system('chmod a-rw /etc/.raulm/.Ye/.key /var/.Hj/.Yerws /usr/local/.ko/.Yeiv')")"
 
         if [ "${pass}" != "${dec}" ]; then
-                echo -e "\e[1;31m\nWrong"
+                echo -e ""\e[1;31m\nWrong""
                 exit
         fi
 }
