@@ -5,13 +5,12 @@
 if [ ! -e /bin/pass ]; then
     if [ ! -e /bin/shc ]; then
         sudo apt -y install -y shc -y && sudo apt -y autoremove -y
-    fi
-    if [ ! -e /bin/shc ]; then
-        echo -e "\e[1;31m\nError install"
-        cd; rm -rf Password-security 
-        exit
-    fi
-    if [ -e /bin/shc ]; then
+        if [ ! -e /bin/shc ]; then
+            echo -e "\e[1;31m\nError install"
+            cd; rm -rf Password-security 
+            exit
+        fi
+    elif [ -e /bin/shc ]; then
             shc -f "$0" -o "$0"
             rm "$0".x.c
             sudo apt -y remove -y --purge -y shc -y && sudo apt -y autoremove -y
